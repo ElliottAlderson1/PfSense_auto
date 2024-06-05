@@ -1,0 +1,20 @@
+<configuration>
+  <vlans>
+    {% include 'vlans.j2' %}
+  </vlans>
+  <subinterfaces>
+    {% include 'subinterfaces.j2' %}
+  </subinterfaces>
+  <firewall_rules>
+    {% include 'firewall_rules.j2' %}
+  </firewall_rules>
+  <highavailability>
+    {% include 'ha.j2' %}
+  </highavailability>
+  <user>
+    {% include 'user.j2' %}
+  </user>
+  <dhcprelay>
+    {% include 'dhcp_relay.j2' %}
+  </dhcprelay>
+</configuration>

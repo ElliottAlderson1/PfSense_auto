@@ -1,0 +1,8 @@
+{% for vlan in vlans %}
+<vlans>
+  <vlan>
+    <vlanid>{{ vlan.id }}</vlanid>
+    <name>{{ vlan.name }}</name>
+  </vlan>
+</vlans>
+{% endfor %}

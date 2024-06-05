@@ -1,0 +1,10 @@
+{% for rule in firewall_rules %}
+<rule>
+  <action>{{ rule.action }}</action>
+  <interface>{{ rule.interface }}</interface>
+  <protocol>{{ rule.protocol }}</protocol>
+  <src>{{ rule.src }}</src>
+  <dst>{{ rule.dst }}</dst>
+  <dstport>{{ rule.dst_port }}</dstport>
+</rule>
+{% endfor %}

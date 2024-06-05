@@ -1,0 +1,6 @@
+{% for subinterface in subinterfaces %}
+<subinterface>
+  <vlanid>{{ subinterface.vlan_id }}</vlanid>
+  <ipaddress>{{ subinterface.ip }}</ipaddress>
+</subinterface>
+{% endfor %}

@@ -1,0 +1,8 @@
+<dhcprelay>
+  <serverip>{{ dhcp_relay.server_ip }}</serverip>
+  <interfaces>
+    {% for interface in dhcp_relay.interfaces %}
+    <interface>{{ interface }}</interface>
+    {% endfor %}
+  </interfaces>
+</dhcprelay>
