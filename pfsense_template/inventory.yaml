@@ -1,3 +1,4 @@
+---
 vlans:
   - id: 1107
     name: VM_NET
