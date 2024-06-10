@@ -1,0 +1,33 @@
+---
+- name: Automate PfSense Firewall Configuration
+  hosts: pfsense
+  become: yes
+  vars:
+    primary_pfsense: 10.10.1.1
+    secondary_pfsense: 10.10.1.2
+    admin_user: admin
+    admin_pass: pfsense
+    config_file: /c/Users/Ninja/Desktop/DevOps_1-24/Pfsense_project/auto-pfsense/generated_config.xml  # Update this path
+
+  tasks:
+    - name: Upload PfSense Configuration to Primary Firewall
+      ansible.builtin.copy:
+        src: "{{ config_file }}"
+        dest: /cf/conf/config.xml
+      when: inventory_hostname == primary_pfsense
+
+    - name: Reload Configuration on Primary Firewall
+      ansible.builtin.command:
+        cmd: /etc/rc.reload_all
+      when: inventory_hostname == primary_pfsense
+
+    - name: Upload PfSense Configuration to Secondary Firewall
+      ansible.builtin.copy:
+        src: "{{ config_file }}"
+        dest: /cf/conf/config.xml
+      when: inventory_hostname == secondary_pfsense
+
+    - name: Reload Configuration on Secondary Firewall
+      ansible.builtin.command:
+        cmd: /etc/rc.reload_all
+      when: inventory_hostname == secondary_pfsense

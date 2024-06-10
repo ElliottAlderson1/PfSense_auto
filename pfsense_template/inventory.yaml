@@ -1,46 +1,26 @@
----
 vlans:
   - id: 1107
     name: VM_NET
+    ip: 10.10.1.1/24
   - id: 333
     name: HA
+    ip: 10.10.1.2/24
   - id: 222
     name: INSIDE
-subinterfaces:
-  - vlan_id: 1107
-    ip: 10.10.1.1
-  - vlan_id: 1107
-    ip: 10.10.1.2
-  - vlan_id: 333
-    ip: 192.168.1.1
-  - vlan_id: 333
-    ip: 192.168.1.2
-  - vlan_id: 222
-    ip: 172.16.7.22
-  - vlan_id: 222
-    ip: 172.16.7.33
+    ip: 10.10.1.3/24
+
 firewall_rules:
   - action: pass
-    interface: lan
+    source: 10.10.1.0/24
+    destination: any
     protocol: tcp
-    src: any
-    dst: any
-    dst_port: 80
-  - action: block
-    interface: wan
-    protocol: tcp
-    src: any
-    dst: any
-    dst_port: 22
+
 ha:
-  sync_interface: vlan333
-  peer_ip: 10.10.1.2
-  password: securepassword
-dhcp_relay:
-  server_ip: 192.168.1.1
-  interfaces:
-    - lan
-    - opt1
-user:
-  username: newuser
-  password: newpassword
+  pfsync_interface: opt1
+  peer_ip: 192.168.1.2
+
+new_user:
+  username: sync
+  password: pfsense
+
+dhcp_relay: 10.200.99.30
